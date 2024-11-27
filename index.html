@@ -92,33 +92,6 @@
         canvas.style.height = window.innerHeight + 'px';
 
         unityShowBanner('WebGL builds are not supported on mobile devices.');
-
-        mergeInto(LibraryManager.library, {
-        UploadFile: function(gameObjectName, methodName, filter, multiple) {
-            var input = document.createElement('input');
-            input.type = 'file';
-            input.accept = filter;
-            input.multiple = multiple;
-
-            input.onchange = function(event) {
-                var files = input.files;
-                if (files.length > 0) {
-                    // Envie o primeiro arquivo selecionado para o Unity
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        unityInstance.SendMessage(gameObjectName, methodName, reader.result);
-                    };
-                    reader.readAsDataURL(files[0]);
-                }
-            };
-
-            // Impede que o evento padrão interfira
-            input.click();
-            event.preventDefault();
-            event.stopPropagation();
-        }
-      });
-      
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
